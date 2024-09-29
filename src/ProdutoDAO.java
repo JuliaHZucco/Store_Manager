@@ -7,13 +7,14 @@ public class ProdutoDAO {
     
     public void salvar(Produto produto) throws Exception {
 
-        var sql = "insert into produto (nome, quantidade, valor) values (?, ?, ?)";
+        var sql = "insert into produto (nome, quantidade, valor, descricao) values (?, ?, ?, ?)";
         
         try (var conexao = Conexao.obterConexao();
             var stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, produto.nome());
                 stmt.setInt(2, produto.quantidade());
                 stmt.setDouble(3, produto.valor());
+                stmt.setString(4, produto.descricao());
                 stmt.executeUpdate();
         } catch (SQLException e) {
             throw new Exception(e);
@@ -34,7 +35,7 @@ public class ProdutoDAO {
                         
                         Produto produto = new Produto(rs.getLong("id"), 
                         rs.getString("nome"), rs.getInt("quantidade"), 
-                        rs.getDouble("valor"));
+                        rs.getDouble("valor"), rs.getString("descricao"));
 
                         produtos.add(produto);
                     }
@@ -60,7 +61,7 @@ public class ProdutoDAO {
                     while (rs.next()) {
                         produto = new Produto(rs.getLong("id"), 
                         rs.getString("nome"), rs.getInt("quantidade"), 
-                        rs.getDouble("valor"));
+                        rs.getDouble("valor"), rs.getString("descricao"));
                     }
                 }
 
@@ -80,6 +81,7 @@ public class ProdutoDAO {
                 stmt.setString(1, produto.nome());
                 stmt.setInt(2, produto.quantidade());
                 stmt.setDouble(3, produto.valor());
+                stmt.setString(1, produto.descricao());
                 stmt.setLong(4, produto.id());
                 stmt.executeUpdate();
         } catch (SQLException e) {

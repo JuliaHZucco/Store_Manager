@@ -45,8 +45,10 @@ public class Main {
         int quantidade = Integer.parseInt(console.readLine());
         System.out.println("Valor:");
         Double valor = Double.parseDouble(console.readLine());
+        System.out.println("Descrição:");
+        String descricao = console.readLine();
 
-        Produto produto = new Produto(nome, quantidade, valor);
+        Produto produto = new Produto(nome, quantidade, valor, descricao);
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         try {
@@ -124,8 +126,10 @@ public class Main {
                 int quantidade = Integer.parseInt(console.readLine());
                 System.out.println("Novo valor (atual: "+produtoExistente.valor()+"): ");
                 Double valor = Double.parseDouble(console.readLine());
+                System.out.println("Nova descricao (atual: "+produtoExistente.descricao()+"): ");
+                String descricao = console.readLine();
 
-                Produto produtoAtualizado = new Produto(id, nome, quantidade, valor);
+                Produto produtoAtualizado = new Produto(id, nome, quantidade, valor, descricao);
 
                 try {
                     produtoDAO.atualizar(produtoAtualizado);
